@@ -14,15 +14,22 @@ const showTime = () => {
     let minutes = d.getMinutes();
 
     let timeOfDay =
-        hours > 5 && hours < 9 ? "Morning"
-            : hours > 9 && hours < 12 ? "Formiddag"
-                :  hours > 12 && hours < 18 ? "Ettermiddag"
-                    : hours > 18 && hours < 23 ? "Kveld"
+        hours >= 5 && hours < 9 ? "Morning"
+            : hours >= 9 && hours < 12 ? "Formiddag"
+                :  hours >= 12 && hours < 18 ? "Ettermiddag"
+                    : hours >= 18 && hours < 23 ? "Kveld"
                         : "Natt"
 
-    if (timeOfDay === "Natt" || "Ettermiddag") {
+    if (timeOfDay === "Natt" || timeOfDay === "Kveld") {
+        bodyElement.classList.remove('day-theme')
         bodyElement.classList.add('night-theme')
+    } 
+    
+    if (timeOfDay === "Morning" || timeOfDay === "Formiddag" || timeOfDay === "Ettermiddag") {
+        bodyElement.classList.remove('night-theme')
+        bodyElement.classList.add('day-theme')
     }
+    
 
     let month = months[d.getMonth()];
     let date  = d.getDate();
